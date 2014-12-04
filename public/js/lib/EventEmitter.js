@@ -43,7 +43,7 @@ EventEmitter.prototype.listen = function(event, callback) {
 };
 
 /**
- * Disassociated a method from an event. The method received must match the bound method exactly. This can be
+ * Disassociate a method from an event. The method received must match the bound method exactly. This can be
  * cause issues when passing anonymous metods. In this case use the results returned from the listen method.
  * @param  {string} event Name of the event from which the method should be disassociated.
  * @param  {Function} callback The method to remove from the event.
@@ -79,7 +79,7 @@ EventEmitter.prototype.ignore = function(event, callback) {
 };
 
 /**
- * [broadcast description]
+ * Trigger the specified event, executing any associated methods and passing data as only attribute
  * @param  {string} event Name of the event to trigger.
  * @param  {*} data Optional argument containing data to pass to each associated method.
  * @return {Void}
