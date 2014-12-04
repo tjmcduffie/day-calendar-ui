@@ -1,158 +1,118 @@
-* {
-  box-sizing: border-box;
-}
-
 body {
-  background: $offwhite;
+  background: $white;
   color: $darkgrey;
-  @include establish-baseline($base-font-size);
+  margin: 0;
 }
 
-.background {
-  background-color: $darkgrey;
-  @include position(fixed);
-  z-index: -1;
-
-  &:before {
-    background: url(/img/mallorca-farm-house-large-1x.jpg) no-repeat center;
-    background-size: cover;
-    content: "";
-    @include position(fixed);
-  }
-
-  &:after {
-    background-color: black;
-    content: "";
-    opacity: .70;
-    @include position(fixed);
-  }
-}
-
-main,
-footer {
-  @include span(12 of 12);
-}
+$imgmultiplier: 1.44;
 
 main {
-  > article,
-  > aside {
-    @extend .row;
-    @include push(1 of 12);
-    @include span(10 of 12);
-  }
-
-  > article {
-    .primary {
-      @include span(first 4 of 10);
-    }
-
-    .summary{
-      @include span(last 6 of 10);
-    }
-
-    .skills {
-      @extend .summary;
-      @include push(4 of 10);
-    }
-  }
-
-  .summary,
-  .skills,
-  .most-recent-project,
-  .links {
-    @extend .block;
-  }
+  // background: transparent url(/img/calendar.png) no-repeat top left;
+  background-size: cover;
+  box-sizing: content-box;
+  height: $calendar-height;
+  padding: $calendar-width-padding * 4 0 $calendar-width-padding * 5;
+  width: 695px;
+  // padding: (20 * $imgmultiplier)+px 0;
+  // width: 695px + (20 * $imgmultiplier);
+  // height: 720px + (59 * $imgmultiplier);
 }
 
-footer {
-  ul {
-    color: $offwhite;
-    @extend .row;
-    @include push(1 of 12);
-    @include span(10 of 12);
-  }
+.day-view {
+  @extend .clearfix
 }
 
-
-header.primary {
-  color: $offwhite;
-  margin-top: 50px;
-
-  h1 {
-    margin-top: 0px;
-  }
-
-  .subtitle {
-    display: block;
-    font-style: italic;
-    font-weight: 600;
-    @include adjust-font-size-to(1.2 * $base-font-size);
-  }
+header {
+  @extend .screenreader-assist
 }
 
-
-
-.skills {
-  dt,
-  dd,
-  ul,
-  li {
-    display: inline;
+ol {
+  &.times, &.events {
+    float: left;
+    height: $calendar-height;
+    padding: 0 10px;
+    text-align: right;
   }
 
-  dt {
-    font-weight: bold;
+  &.times {
+    margin-top: -0.33rem;
+    width: 75px;
 
-    &:before {
-      content: "";
+    li {
+      height: ($calendar-height - $base-font-size / 2) / $calendar-increments;
+      white-space: nowrap;
+    }
+
+    .hour {
+      font-size: 1.25rem;
+      line-height: 1.25rem;
+
+      .meridian {
+        @extend .half-hour
+      }
+    }
+    
+    .half-hour {
+      font-size: 1rem;
+      line-height: 1.33rem;
+    }
+  }
+
+  &.events {
+    background-color: $lightgrey;
+    border-left: 1px $midlightgrey solid;
+    position: relative;
+    text-align: left;
+    width: $calendar-width;
+
+    .event {
+      background-color: $white;
+      border: 1px $midlightgrey solid;
+      border-left: 3px $accent solid;
+      padding: 7px;
+      position: absolute;
+    }
+
+    @each $id in $parallelitems {
+      $parallel-selector: unquote('.parallel-#{$id}');
+      $width: ($calendar-width - ($calendar-width-padding * 2)) / $id;
+
+      #{$parallel-selector} {
+        @if $id > 1 {
+          width: $width;
+        }
+      }
+
+      @each $pid in $parallelitems {
+        $offset-selector: unquote('#{$parallel-selector}.push-#{$pid}');
+        $left: $width * ($pid - 1) + $calendar-width-padding;
+        @if $pid <= $id {
+          @if $left > 0 {
+            #{$offset-selector} {
+              left: $left;
+            }
+          }
+        }
+      }
+    }
+
+    h2, .location {
       display: block;
-      margin-top: 20px;
+      margin: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
-    &:after {
-      content: ":";
-    }
-  }
-
-  dd, ul {
-    margin: 0;
-    padding: 0;
-  }
-
-  li {
-    &:after {
-      content: ",";
-    }
-    &:last-child:after {
-      content: "";
-    }
-  }
-}
-
-.most-recent-project {
-  @include span(last 6 of 10);
-}
-
-.links {
-  // @include pull(5 of 12);
-  @include span(first 4 of 10);
-
-  ul {
-    padding-left: 0;
-    margin-top: 0;
-    @include span(4 of 4);
-  }
-
-  li {
-    list-style-type: none;
-    @include span(2 of 4);
-
-    &:first-child {
-      @include first;
+    h2 {
+      color: $accent;
+      font-size: 1.08333333rem;
+      line-height: 1.08333333rem;
     }
 
-    &:last-child {
-      @include last;
+    .location {
+      color: $middarkgrey;
+      font-size: 1rem;
     }
   }
 }
