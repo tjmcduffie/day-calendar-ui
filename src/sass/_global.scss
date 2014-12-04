@@ -1,71 +1,54 @@
-h1 {
-  font-family: $headline-font;
-  font-weight: 300;
+* {
+  box-sizing: border-box;
 }
 
+html {
+  font-size: $base-font-size;
+  line-height: $base-line-height;
+}
+
+h1, 
 h2,
 h3,
 h4,
 h5,
 h6 {
-  font-family: $headline-font;
-  font-style: italic;
-  font-weight: 600;
+  font-family: $sanserif;
+  font-weight: normal;
 }
 
-// .block {
-//   border: 15px $offwhite solid;
-//   margin-top: 50px;
-//   padding: 15px;
-//   position: relative;
+p {
+  margin: 1rem 0;
+}
 
-//   & > * {
-//     position: relative;
-//     z-index: 3;
-//   }
+img {
+  display: block;
+}
 
-//   &:after {
-//     background: $offwhite;
-//     border:1px $darkgrey dashed;
-//     content: "";
-//     @include position(absolute, -5px);
-//   }
+ol, ul {
+  margin: 0;
+  padding: 0;
+}
 
-//   > :first-child {
-//     margin-top: 0px;
-//   }
+ol {
+  list-style-type: none;
+}
 
-//   > :last-child {
-//     margin-bottom: 0px;
-//   }
-// }
+.screenreader-assist {
+  position:absolute;
+  left:-10000px;
+  top:auto;
+  width:1px;
+  height:1px;
+  overflow:hidden;
+}
 
-// .button {
-//   background: linear-gradient(180deg, adjust-lightness(white, -15), adjust-lightness(white, -25));
-//   border: 1px $darkgrey solid;
-//   border-radius: 3px;
-//   color: $darkgrey;
-//   display: block;
-//   font-family: $headline-font;
-//   font-weight: 700;
-//   padding: 13% 10%;
-//   text-decoration: none;
+.clearfix:before,
+.clearfix:after {
+    content: " ";
+    display: table;
+}
 
-//   span {
-//     display: inline-block;
-//     line-height: 1rem;
-//     max-width: 70%;
-//     vertical-align: middle;
-//   }
-
-//   i {
-//     @extend span;
-//     margin-right: 10%;
-//     max-width: 20%;
-
-//     img {
-//       display: block;
-//       max-width: 100%;
-//     }
-//   }
-// }
+.clearfix:after {
+    clear: both;
+}
