@@ -183,6 +183,22 @@ module.exports = function(grunt) {
       }
     },
 
+    bump: {
+      options: {
+        files: ['package.json'],
+        commit: false,
+        commitMessage: 'Release v%VERSION%',
+        commitFiles: ['package.json', 'public/css/day-calendar.css'],
+        createTag: false,
+        tagName: 'v%VERSION%',
+        tagMessage: 'Version %VERSION%',
+        push: false,
+        pushTo: 'upstream',
+        gitDescribeOptions: '--tags --always --abbrev=1 --dirty=-d',
+        globalReplace: false
+      }
+    },
+
     watch: {
       gruntfile: {
         files: '<%= jshint.gruntfile.src %>',
@@ -238,6 +254,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-yuidoc');
   grunt.loadNpmTasks('grunt-bower');
+  grunt.loadNpmTasks('grunt-bump');
   grunt.loadNpmTasks('grunt-filerev');
   grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-newer');
@@ -249,6 +266,21 @@ module.exports = function(grunt) {
   // Default task.
   grunt.registerTask('default', ['bower', 'compass:dev', 'imageprep', 'jshint', 'karma:continuous',
       'connect:site', 'watch']);
-  grunt.registerTask('imageprep', ['newer:responsive_images:backgrounds', 'newer:imagemin:backgrounds']);
+
+  grunt.registerTask('reloadPackage', function () {
+    grunt.config.set('pkg', grunt.file.readJSON('package.json'));
+  });
+
+  grunt.registerTask('release', function (target) {
+    var acceptableTargets = ['patch', 'minor', 'major', 'prerelease', 'git'];
+
+    if (!target || acceptableTargets.indexOf(target) === -1) {
+      target = '';
+    } else {
+      target = ':' + target;
+    }
+
+    grunt.task.run(['compass:build', 'bump' + target, 'reloadPackage', 'compress']);
+  });
 
 };
