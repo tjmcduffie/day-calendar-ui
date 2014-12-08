@@ -2,6 +2,7 @@
 /* global TMCD */
 'use strict';
 
+
 /**
  * Logger object allowing modules to send messages to the appropriate destination. Currently this only sends
  * messages to the console, however it can be easily extended to sed messages to a service for saving or
@@ -46,9 +47,17 @@ TMCD.Logger.reportLevel = {
  * @static
  */
 TMCD.Logger.options = {
-  'REPORT_LEVEL' : TMCD.Logger.reportLevel.DEBUG
+  'REPORT_LEVEL' : TMCD.Logger.reportLevel.NONE
 };
 
+
+/**
+ * Sets an option for the logging service.
+ *
+ * @method setOption
+ * @param {String} key Name of the option to set.
+ * @param {Mixed} value Value of the option.
+ */
 TMCD.Logger.setOption = function (key, value) {
   if (!TMCD.Logger.options[key] && !!(console)) {
     console.warn(key + 'does not exist an an option for TMCD.Logger.');
@@ -97,3 +106,4 @@ TMCD.Logger.error = function() {
     console.error.apply(console, arguments);
   }
 };
+

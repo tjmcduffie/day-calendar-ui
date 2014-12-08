@@ -1,14 +1,12 @@
-/* jshint browser: true */
 /* global TMCD */
 'use strict';
 
 
 /**
- * CalendarEvent constructor for individual calendar events
+ * CalendarEvent constructor for individual calendar events.
  *
  * @class CalendarEvent
- * @uses Logger
- * @uses EventEmitter
+ * @requires Logger
  * @param {Object} options Configuration options for the event.
  * @param {Object} options.start Event start time.
  * @param {Object} options.end Event end time.
@@ -39,7 +37,7 @@ TMCD.CalendarEvent = function (options) {
    * Time at which the event starts. Time should be measured in number of minutes since the start of the day.
    *
    * @property start
-   * @type Number
+   * @type {Number}
    */
   this.start = options.start;
 
@@ -47,7 +45,7 @@ TMCD.CalendarEvent = function (options) {
    * Time at which the event ends. Time should be measured in number of minutes since the start of the day.
    *
    * @property end
-   * @type Number
+   * @type {Number}
    */
   this.end = options.end;
 
@@ -55,36 +53,11 @@ TMCD.CalendarEvent = function (options) {
    * The dom representation of the element.
    *
    * @property dom
-   * @type HTMLElement
+   * @type {HTMLElement}
    */
   this.dom = this._render();
 
-/*** Id of the event.* @type Number|Undefined*/
-this.id = undefined;
-
-/*** @TODO turn this into a number of columns available property. Should be used to calculate width. */
-this.width = 1;
-
-/*** @TODO turn this into a column to occupy property. Should be used to calculate width.*/
-this.offsetX = 1;
-
-/*** List of neighbor Ids.* @type Array.Numbers*/
-this.neighbors = [];
-
-
-
-  TMCD.CalendarEvent.observer.listen('calendar.layout.updated', function() {});
 };
-
-
-/**
- * Event emitter used to communicate events to internal (and potentially external) modules.
- *
- * @type EventEmitter
- * @property observer
- * @static
- */
-TMCD.CalendarEvent.observer = TMCD.EventEmitter;
 
 
 /**
@@ -92,12 +65,12 @@ TMCD.CalendarEvent.observer = TMCD.EventEmitter;
  * with a non operational function.
  *
  * @method _render
- * @return {HTMLElement} html representation of the calendar event
+ * @return {HTMLElement} HTML representation of the calendar event.
  * @private
  */
 TMCD.CalendarEvent.prototype._render = function () {
-
   var dom = document.createElement('li');
+
   dom.setAttribute('class', 'event');
   dom.innerHTML = '';
   dom.innerHTML += '<h2>Sample Title</h2>';
@@ -113,7 +86,7 @@ TMCD.CalendarEvent.prototype._render = function () {
 
 /**
  * Set the current view for the calenday. If additional tasks are associated with setting a view such as
- * rendering a container template, this is where those calls should happen
+ * rendering a container template, this is where those calls should happen.
  *
  * @method setDisplay
  * @param {String} name Name of the display property to set. Should correspond to a style property.

@@ -1,14 +1,14 @@
 /* global TMCD */
 'use strict';
 
+
 /**
  * The calendar oject manages the calendar's public API and View states.
  *
  * @class Calendar
- * @uses Logger
- * @uses EventEmitter
- * @uses CalendarEvent
- * @uses DayView
+ * @requires Logger
+ * @requires CalendarEvent
+ * @requires DayView
  * @param {HTMLElement} domElement
  * @param {String} viewType
  * @constructor
@@ -16,22 +16,31 @@
 TMCD.Calendar = function (viewType, domElement) {
 
   /**
-   * Calendar container element
+   * Calendar container element.
    *
    * @property _elem
-   * @type HTMLElement
+   * @type {HTMLElement}
    * @private
    */
   this._elem = domElement;
 
   /**
-   * View module type
+   * View module type.
    *
    * @property _view
-   * @type mixed
+   * @type {Mixed}
    * @private
    */
   this._view = null;
+
+  /**
+   * List of events contained in the view.
+   *
+   * @property _events
+   * @type {Array.CalendarEvent}
+   * @private
+   */
+  this._events = [];
 
   var err;
 
@@ -46,21 +55,11 @@ TMCD.Calendar = function (viewType, domElement) {
 
 
 /**
- * Event emitter used to communicate events to internal (and potentially external) modules.
- *
- * @type EventEmitter
- * @property observer
- * @static
- */
-TMCD.Calendar.observer = TMCD.EventEmitter;
-
-
-/**
  * Views enum. Contains a mapping of view types to view objects.
  *
  * @property views
  * @readOnly
- * @type Enum
+ * @type {Enum}
  * @static
  */
 TMCD.Calendar.views = {
@@ -70,10 +69,10 @@ TMCD.Calendar.views = {
 
 /**
  * Set the current view for the calenday. If additional tasks are associated with setting a view such as
- * rendering a container template, this is where those calls should happen
+ * rendering a container template, this is where those calls should happen.
  *
  * @method _setView
- * @param {mixed} ViewConstructor View constructor stored on the views enum.
+ * @param {Mixed} ViewConstructor View constructor stored on the views enum.
  * @private
  */
 TMCD.Calendar.prototype._setView = function (ViewConstructor) {
@@ -97,11 +96,13 @@ TMCD.Calendar.prototype.createEvents = function (events) {
     throw err;
   }
 
+  this._events = this._events.concat(events);
+
   for (var i = 0; i < events.length; i++) {
     TMCD.Logger.debug('Calendar.CreateEvent', events[i]);
 
     calevent = new TMCD.CalendarEvent(events[i]);
-    TMCD.Calendar.observer.broadcast('calendar.event.create', calevent);
+    this._view.addEventToLayout(calevent);
   }
 };
 
