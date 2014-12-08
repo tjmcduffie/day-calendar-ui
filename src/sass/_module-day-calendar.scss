@@ -51,7 +51,7 @@ ol {
         @extend .half-hour
       }
     }
-    
+
     .half-hour {
       font-size: 1rem;
       line-height: 1.33rem;
@@ -69,32 +69,34 @@ ol {
       background-color: $white;
       border: 1px $midlightgrey solid;
       border-left: 3px $accent solid;
+      overflow: hidden;
       padding: 7px;
       position: absolute;
+      width: $calendar-width - (2 * $calendar-width-padding);
     }
 
-    @each $id in $parallelitems {
-      $parallel-selector: unquote('.parallel-#{$id}');
-      $width: ($calendar-width - ($calendar-width-padding * 2)) / $id;
+    // @each $id in $parallelitems {
+    //   $parallel-selector: unquote('.parallel-#{$id}');
+    //   $width: ($calendar-width - ($calendar-width-padding * 2)) / $id;
 
-      #{$parallel-selector} {
-        @if $id > 1 {
-          width: $width;
-        }
-      }
+    //   #{$parallel-selector} {
+    //     @if $id > 1 {
+    //       width: $width;
+    //     }
+    //   }
 
-      @each $pid in $parallelitems {
-        $offset-selector: unquote('#{$parallel-selector}.push-#{$pid}');
-        $left: $width * ($pid - 1) + $calendar-width-padding;
-        @if $pid <= $id {
-          @if $left > 0 {
-            #{$offset-selector} {
-              left: $left;
-            }
-          }
-        }
-      }
-    }
+    //   @each $pid in $parallelitems {
+    //     $offset-selector: unquote('#{$parallel-selector}.push-#{$pid}');
+    //     $left: $width * ($pid - 1) + $calendar-width-padding;
+    //     @if $pid <= $id {
+    //       @if $left > 0 {
+    //         #{$offset-selector} {
+    //           left: $left;
+    //         }
+    //       }
+    //     }
+    //   }
+    // }
 
     h2, .location {
       display: block;
