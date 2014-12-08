@@ -1,6 +1,11 @@
 /* variables */
 @import 'vars';
 
+/**
+ * @startcomment 12-4-2014 tim mcduffie
+ * Currently not using SUSY so the following grid declarations and import are not getting used. Leaving 
+ * them in for now as they are not output into the CSS and are therefore not harmful.
+ */
 /* Susy */
 $susy: (
   columns: 12,
@@ -17,6 +22,9 @@ $breakpoints: (
 
 /* vendor files */
 @import '../../bower_components/susy/sass/susy';
+/**
+ * @endcomment 12-4-2014 tim mcduffie
+ */
 
 /* site files */
 @import 'global';
