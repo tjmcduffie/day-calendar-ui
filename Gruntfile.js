@@ -264,7 +264,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-usemin');
 
   // Default task.
-  grunt.registerTask('default', ['bower', 'compass:dev', 'imageprep', 'jshint', 'karma:continuous',
+  grunt.registerTask('default', ['bower', 'compass:dev', 'jshint', 'karma:continuous',
       'connect:site', 'watch']);
 
   grunt.registerTask('reloadPackage', function () {
