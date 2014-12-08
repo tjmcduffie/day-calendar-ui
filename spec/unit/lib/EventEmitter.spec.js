@@ -4,21 +4,19 @@ describe('The EventEmitter', function() {
   var origWarn = console.warn;
 
   beforeEach(function() {
-    observer = TMCD.EventEmitter;
+    observer = new TMCD.EventEmitter();
     callbackMock = jasmine.createSpyObj('callbackMock', ['one', 'two', 'three']);
     spyOn(console, 'warn').and.callThrough();
   });
 
   afterEach(function() {
     console.warn = origWarn;
-    // reset events
-    observer._events = {};
   });
 
   describe('should allow external objects to bind a callback to an event', function() {
     // this test is only accurate when working directly with a constructor. If using a singleton the test will
     // fail.
-    xit('should start off with an empty object as the event map', function() {
+    it('should start off with an empty object as the event map', function() {
       expect(observer._events).toEqual({});
     });
     it('should store bound events in the events object', function() {

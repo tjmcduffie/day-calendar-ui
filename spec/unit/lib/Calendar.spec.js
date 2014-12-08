@@ -12,7 +12,6 @@ describe('The Calendar', function() {
   beforeEach(function() {
     spyOn(TMCD.Calendar.prototype, '_setView').and.callThrough();
     spyOn(TMCD.Calendar.prototype, 'createEvents').and.callThrough();
-    spyOn(TMCD.Calendar.observer, 'broadcast');
 
     spyOn(TMCD.Logger, 'error');
     spyOn(TMCD.Logger, 'warn');
@@ -30,7 +29,7 @@ describe('The Calendar', function() {
   });
 
   describe('sets the current view based on supplied configuration', function () {
-    it ('requires a view type to function properly', function () {
+    it('requires a view type to function properly', function () {
       calendar = new TMCD.Calendar('day', containerElem);
 
       expect(TMCD.Calendar.prototype._setView).toHaveBeenCalled();
@@ -52,12 +51,6 @@ describe('The Calendar', function() {
           mockEventData, mockEventData, mockEventData, mockEventData, mockEventData, mockEventData,
           mockEventData, mockEventData, mockEventData, mockEventData, mockEventData, mockEventData,
           mockEventData, mockEventData, mockEventData, mockEventData, mockEventData]); }).not.toThrow();
-    });
-    it('should broadcaast the creation event for all events created', function() {
-      calendar.createEvents([mockEventData, mockEventData, mockEventData,
-          mockEventData, mockEventData]);
-      expect(TMCD.Calendar.observer.broadcast).toHaveBeenCalledWith('calendar.event.create', mockEventData);
-      expect(TMCD.Calendar.observer.broadcast.calls.count()).toEqual(5);
     });
   });
 
