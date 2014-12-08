@@ -1,0 +1,307 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style>
+body { background-color: #eeeeee; padding: 0; margin: 5px; overflow-y: scroll; }
+#HTMLReporter { font-size: 11px; font-family: Monaco, "Lucida Console", monospace; line-height: 14px; color: #333333; }
+#HTMLReporter a { text-decoration: none; }
+#HTMLReporter a:hover { text-decoration: underline; }
+#HTMLReporter p, #HTMLReporter h1, #HTMLReporter h2, #HTMLReporter h3, #HTMLReporter h4, #HTMLReporter h5, #HTMLReporter h6 { margin: 0; line-height: 14px; }
+#HTMLReporter .banner, #HTMLReporter .symbolSummary, #HTMLReporter .summary, #HTMLReporter .resultMessage, #HTMLReporter .specDetail .description, #HTMLReporter .alert .bar, #HTMLReporter .stackTrace { padding-left: 9px; padding-right: 9px; }
+#HTMLReporter #jasmine_content { position: fixed; right: 100%; }
+#HTMLReporter .version { color: #aaaaaa; }
+#HTMLReporter .banner { margin-top: 14px; }
+#HTMLReporter .duration { color: #aaaaaa; float: right; }
+#HTMLReporter .exceptions { color: #fff; float: right; margin-top: 5px; margin-right: 5px; }
+#HTMLReporter .bar { line-height: 28px; font-size: 14px; display: block; color: #eee; }
+#HTMLReporter .runningAlert { background-color: #666666; }
+#HTMLReporter .skippedAlert { background-color: #aaaaaa; }
+#HTMLReporter .skippedAlert:first-child { background-color: #333333; }
+#HTMLReporter .skippedAlert:hover { text-decoration: none; color: white; text-decoration: underline; }
+#HTMLReporter .passingAlert { background-color: #a6b779; }
+#HTMLReporter .passingAlert:first-child { background-color: #5e7d00; }
+#HTMLReporter .failingAlert { background-color: #cf867e; }
+#HTMLReporter .failingAlert:first-child { background-color: #b03911; }
+#HTMLReporter .results { margin-top: 14px; }
+#HTMLReporter #details { display: none; }
+#HTMLReporter .resultsMenu, #HTMLReporter .resultsMenu a { background-color: #fff; color: #333333; }
+#HTMLReporter.showDetails .summaryMenuItem { font-weight: normal; text-decoration: inherit; }
+#HTMLReporter.showDetails .summaryMenuItem:hover { text-decoration: underline; }
+#HTMLReporter.showDetails .detailsMenuItem { font-weight: bold; text-decoration: underline; }
+#HTMLReporter.showDetails .summary { display: none; }
+#HTMLReporter.showDetails #details { display: block; }
+#HTMLReporter .summaryMenuItem { font-weight: bold; text-decoration: underline; }
+#HTMLReporter .summary { margin-top: 14px; }
+#HTMLReporter .summary .suite .suite, #HTMLReporter .summary .specSummary { margin-left: 14px; }
+#HTMLReporter .summary .specSummary.passed span { color: #5e7d00; }
+#HTMLReporter .summary .specSummary.failed span { color: #b03911; }
+#HTMLReporter .description + .suite { margin-top: 0; }
+#HTMLReporter .suite { margin-top: 14px; }
+#HTMLReporter .suite a { color: #333333; }
+#HTMLReporter #details .specDetail { margin-bottom: 28px; }
+#HTMLReporter #details .specDetail .description { display: block; color: white; background-color: #b03911; }
+#HTMLReporter .resultMessage { padding-top: 14px; color: #333333; }
+#HTMLReporter .resultMessage span.result { display: block; }
+#HTMLReporter .stackTrace { margin: 5px 0 0 0; max-height: 224px; overflow: auto; line-height: 18px; color: #666666; border: 1px solid #ddd; background: white; white-space: pre; }
+</style>
+ <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+ <script>
+ 	$(function(){
+		$("a.summaryMenuItem").on("click", function(){
+			$("body").removeClass("showDetails").addClass("showSummary");
+		});
+		$("a.detailsMenuItem").on("click", function(){
+			$("body").addClass("showDetails").removeClass("showSummary");
+		});
+
+	});
+ </script>
+</head>
+
+<body id="HTMLReporter" class="html-reporter">
+<h1>Safari 6.2.0 (Mac OS X 10.8.5)</h1>
+
+<div class="alert">
+
+
+
+	
+	<span class="passingAlert bar">Passing 34 specs</span>
+	
+
+
+</div>
+<div class="results">
+	<div class="summary">
+
+
+	
+		<div class="suite passed">
+			<span class="description">The Calendar sets the current view based on supplied configuration</span>
+		
+			<div class="specSummary passed">
+			<span class="description">requires a view type to function properly</span>
+			</div>
+		
+		</div>
+	
+		<div class="suite passed">
+			<span class="description">The Calendar allows events to be added to the calendar</span>
+		
+			<div class="specSummary passed">
+			<span class="description">can accept and create any number of events</span>
+			</div>
+		
+		</div>
+	
+		<div class="suite passed">
+			<span class="description">The Calendar throws various errors which</span>
+		
+			<div class="specSummary passed">
+			<span class="description">should be logged during instantiation</span>
+			</div>
+		
+			<div class="specSummary passed">
+			<span class="description">should be logged during event creation</span>
+			</div>
+		
+		</div>
+	
+		<div class="suite passed">
+			<span class="description">The Calendar Event communicate errors</span>
+		
+			<div class="specSummary passed">
+			<span class="description">when configured improperly</span>
+			</div>
+		
+		</div>
+	
+		<div class="suite passed">
+			<span class="description">The Calendar Event manages internal state</span>
+		
+			<div class="specSummary passed">
+			<span class="description">including start and end times</span>
+			</div>
+		
+			<div class="specSummary passed">
+			<span class="description">including HTML representation</span>
+			</div>
+		
+		</div>
+	
+		<div class="suite passed">
+			<span class="description">The Calendar Event allows external objects to change its display</span>
+		
+			<div class="specSummary passed">
+			<span class="description">by translating key value pairs into styles</span>
+			</div>
+		
+		</div>
+	
+		<div class="suite passed">
+			<span class="description">The DayView sets up the current view</span>
+		
+			<div class="specSummary passed">
+			<span class="description">by gathering style information about the container</span>
+			</div>
+		
+		</div>
+	
+		<div class="suite passed">
+			<span class="description">The DayView compares event data to determine if they intersect</span>
+		
+			<div class="specSummary passed">
+			<span class="description">and can accept and create any number of events</span>
+			</div>
+		
+		</div>
+	
+		<div class="suite passed">
+			<span class="description">The DayView retrieves row information for the new event</span>
+		
+			<div class="specSummary passed">
+			<span class="description">when it is the only event</span>
+			</div>
+		
+			<div class="specSummary passed">
+			<span class="description">or when other events are present</span>
+			</div>
+		
+		</div>
+	
+		<div class="suite passed">
+			<span class="description">The DayView processes retrieved meta data to update column widths</span>
+		
+			<div class="specSummary passed">
+			<span class="description">when it is the only event</span>
+			</div>
+		
+			<div class="specSummary passed">
+			<span class="description">or when other events are present</span>
+			</div>
+		
+		</div>
+	
+		<div class="suite passed">
+			<span class="description">The DayView converts column widths into styles</span>
+		
+			<div class="specSummary passed">
+			<span class="description">based on the container layout</span>
+			</div>
+		
+		</div>
+	
+		<div class="suite passed">
+			<span class="description">The DayView manages the layout and DOM tree via a single public method</span>
+		
+			<div class="specSummary passed">
+			<span class="description">and handles one element at a time</span>
+			</div>
+		
+			<div class="specSummary passed">
+			<span class="description">updating previously ceated events as necessary</span>
+			</div>
+		
+		</div>
+	
+		<div class="suite passed">
+			<span class="description">The EventEmitter should allow external objects to bind a callback to an event</span>
+		
+			<div class="specSummary passed">
+			<span class="description">should start off with an empty object as the event map</span>
+			</div>
+		
+			<div class="specSummary passed">
+			<span class="description">should store bound events in the events object</span>
+			</div>
+		
+			<div class="specSummary passed">
+			<span class="description">should allow multiple events to be bound to a single event</span>
+			</div>
+		
+			<div class="specSummary passed">
+			<span class="description">should throw an error if binding is attempted without the necessary params</span>
+			</div>
+		
+		</div>
+	
+		<div class="suite passed">
+			<span class="description">The EventEmitter should allow external objects to unbind a callback from an event</span>
+		
+			<div class="specSummary passed">
+			<span class="description">should allow removal via the original event and method</span>
+			</div>
+		
+			<div class="specSummary passed">
+			<span class="description">should allow removal via the returned event and method</span>
+			</div>
+		
+			<div class="specSummary passed">
+			<span class="description">should throw an error if binding is attempted without the necessary params</span>
+			</div>
+		
+		</div>
+	
+		<div class="suite passed">
+			<span class="description">The EventEmitter should execute bound callbacks when an event is triggered</span>
+		
+			<div class="specSummary passed">
+			<span class="description">should only execute methods for a given event when that event is published</span>
+			</div>
+		
+			<div class="specSummary passed">
+			<span class="description">should execute all methods for a given event when that event is published</span>
+			</div>
+		
+			<div class="specSummary passed">
+			<span class="description">should pass the supplied data to assocaited methods when an event is published</span>
+			</div>
+		
+			<div class="specSummary passed">
+			<span class="description">should throw an error if broadcasting is attempted without the necessary params</span>
+			</div>
+		
+		</div>
+	
+		<div class="suite passed">
+			<span class="description">the Logger communicates various levels of messages to the system messages are passed through to the system console</span>
+		
+			<div class="specSummary passed">
+			<span class="description">and calles the corresponding method based on severity</span>
+			</div>
+		
+		</div>
+	
+		<div class="suite passed">
+			<span class="description">the Logger communicates various levels of messages to the system and can suppress messages based on severity</span>
+		
+			<div class="specSummary passed">
+			<span class="description">by setting the report level</span>
+			</div>
+		
+			<div class="specSummary passed">
+			<span class="description">when set to debug, no messages should be suppressed</span>
+			</div>
+		
+			<div class="specSummary passed">
+			<span class="description">when set to warn, messges with severity lower than warning should be suppressed</span>
+			</div>
+		
+			<div class="specSummary passed">
+			<span class="description">when set to error, messges with severity lower than error should be suppressed</span>
+			</div>
+		
+			<div class="specSummary passed">
+			<span class="description">when set to none, all messges should be suppressed</span>
+			</div>
+		
+		</div>
+	
+</div>
+
+<div id="details">
+	
+</div>
+</body>
+</html>
+

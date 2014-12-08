@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>public/js/lib/CalendarEvent.js - day-calendar-ui</title>
+    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="stylesheet" href="../assets/css/custom.css">
+    <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.css">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+</head>
+<body class="yui3-skin-sam">
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <h1 class="brand" style="padding: 10px 16px 10px; height: 20px; line-height: 20px; margin-left: 0;">
+        
+	    <img alt="day-calendar-ui" src="../assets/css/logo.png" style="max-height: 65%;" title="day-calendar-ui">
+        
+            day-calendar-ui
+        </h1>
+	<div class="nav">
+            <li class="divider-vertical"></li>
+            <li>
+                <p class="navbar-text">
+                    API Docs for Version: <b>0.0.0</b>
+                </p>
+            </li>
+        </div>
+        <form class="navbar-form pull-right" style="line-height: 40px; height: 40px;">
+            <input style="margin-top: 0;" type="text" class="search-query" placeholder="Search for classes/modules..." data-obj='["classes/Calendar", "classes/CalendarEvent", "classes/DayView", "classes/EventEmitter", "classes/Logger", "modules/DayCalendar"]'>
+        </form>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="span3">
+	    <div>
+    <h3>APIs</h3>
+    <div id="sidebar">
+        <ul id="main-nav" class="nav nav-tabs" style="margin-bottom:0;">
+            <li class="active"><a href="#classes" data-toggle="tab">Classes</a></li>
+            <li><a href="#modules" data-toggle="tab">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" placeholder="Type to filter APIs">
+        </div>
+
+        <div class="tab-content" style="border: 1px solid #DDD; border-top:0;">
+            <div class="tab-pane active" id="classes">
+                <ul id="api-classes" class="nav nav-list">
+                    
+                        <li><a href="../classes/Calendar.html">Calendar</a></li>
+                    
+                        <li><a href="../classes/CalendarEvent.html">CalendarEvent</a></li>
+                    
+                        <li><a href="../classes/DayView.html">DayView</a></li>
+                    
+                        <li><a href="../classes/EventEmitter.html">EventEmitter</a></li>
+                    
+                        <li><a href="../classes/Logger.html">Logger</a></li>
+                    
+                </ul>
+            </div>
+
+            <div class="tab-pane" id="modules">
+                <ul id="api-modules" class="nav nav-list">
+                    
+                        <li><a href="../modules/DayCalendar.html">DayCalendar</a></li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+        </div>
+        <div class="span9">
+                <form id="options-form" class="form-inline pull-right">
+        Show:
+        <label for="api-show-inherited" class="checkbox">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected" class="checkbox">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private" class="checkbox">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated" class="checkbox">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </form>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <div class="page-header">
+    <h1>public/js/lib/CalendarEvent.js <small>File</small></h1>
+</div>
+
+<div class="file">
+    <pre class="prettyprint linenums">
+/* global TMCD */
+&#x27;use strict&#x27;;
+
+
+/**
+ * CalendarEvent constructor for individual calendar events.
+ *
+ * @class CalendarEvent
+ * @requires Logger
+ * @param {Object} options Configuration options for the event.
+ * @param {Object} options.start Event start time.
+ * @param {Object} options.end Event end time.
+ * @constructor
+ */
+TMCD.CalendarEvent = function (options) {
+  var err;
+
+  if (typeof options.start === &#x27;undefined&#x27;) {
+    err = new Error(&#x27;Calendar Events require a start time to be created&#x27;);
+    TMCD.Logger.error(err.message);
+    throw err;
+  }
+
+  if (typeof options.end === &#x27;undefined&#x27;) {
+    err = new Error(&#x27;Calendar Events require an end time to be created&#x27;);
+    TMCD.Logger.error(err.message);
+    throw err;
+  }
+
+  if (options.end &lt; options.start) {
+    err = new Error(&#x27;Calendar Events end time must occur after the start time&#x27;);
+    TMCD.Logger.error(err.message);
+    throw err;
+  }
+
+  /**
+   * Time at which the event starts. Time should be measured in number of minutes since the start of the day.
+   *
+   * @property start
+   * @type {Number}
+   */
+  this.start = options.start;
+
+  /**
+   * Time at which the event ends. Time should be measured in number of minutes since the start of the day.
+   *
+   * @property end
+   * @type {Number}
+   */
+  this.end = options.end;
+
+  /**
+   * The dom representation of the element.
+   *
+   * @property dom
+   * @type {HTMLElement}
+   */
+  this.dom = this._render();
+
+};
+
+
+/**
+ * Render the events HTML template. This only runs once and before returning the element, replaces itself
+ * with a non operational function.
+ *
+ * @method _render
+ * @return {HTMLElement} Html representation of the calendar event.
+ * @private
+ */
+TMCD.CalendarEvent.prototype._render = function () {
+  var dom = document.createElement(&#x27;li&#x27;);
+
+  dom.setAttribute(&#x27;class&#x27;, &#x27;event&#x27;);
+  dom.innerHTML = &#x27;&#x27;;
+  dom.innerHTML += &#x27;&lt;h2&gt;Sample Title&lt;/h2&gt;&#x27;;
+  dom.innerHTML += &#x27;&lt;span class=&quot;location&quot;&gt;Sample Location&lt;/span&gt;&#x27;;
+
+  // after execution the dom property should be accessed and manipulated directly, therfore we set this
+  // function to a noop after first execution.
+  this._render = function () {};
+
+  return dom;
+};
+
+
+/**
+ * Set the current view for the calenday. If additional tasks are associated with setting a view such as
+ * rendering a container template, this is where those calls should happen.
+ *
+ * @method setDisplay
+ * @param {String} name Name of the display property to set. Should correspond to a style property.
+ * @param {String|Number} value Value of the style property
+ */
+TMCD.CalendarEvent.prototype.setDisplay = function (name, value) {
+  var err;
+
+  if (typeof this.dom.style[name] === &#x27;undefined&#x27;) {
+    err = new Error(&#x27;cannot set property &#x27; + name + &#x27; on the element\&#x27;s style&#x27;);
+    TMCD.Logger.error(err.message);
+    throw err;
+  }
+
+  this.dom.style[name] = value;
+};
+
+
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/jquery/jquery-1.8.2.min.js"></script>
+<script src="../assets/vendor/bootstrap/js/bootstrap.js"></script>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script src="../assets/js/yuidoc-bootstrap.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

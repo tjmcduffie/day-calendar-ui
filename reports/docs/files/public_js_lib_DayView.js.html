@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>public/js/lib/DayView.js - day-calendar-ui</title>
+    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="stylesheet" href="../assets/css/custom.css">
+    <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.css">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+</head>
+<body class="yui3-skin-sam">
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <h1 class="brand" style="padding: 10px 16px 10px; height: 20px; line-height: 20px; margin-left: 0;">
+        
+	    <img alt="day-calendar-ui" src="../assets/css/logo.png" style="max-height: 65%;" title="day-calendar-ui">
+        
+            day-calendar-ui
+        </h1>
+	<div class="nav">
+            <li class="divider-vertical"></li>
+            <li>
+                <p class="navbar-text">
+                    API Docs for Version: <b>0.0.0</b>
+                </p>
+            </li>
+        </div>
+        <form class="navbar-form pull-right" style="line-height: 40px; height: 40px;">
+            <input style="margin-top: 0;" type="text" class="search-query" placeholder="Search for classes/modules..." data-obj='["classes/Calendar", "classes/CalendarEvent", "classes/DayView", "classes/EventEmitter", "classes/Logger", "modules/DayCalendar"]'>
+        </form>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="span3">
+	    <div>
+    <h3>APIs</h3>
+    <div id="sidebar">
+        <ul id="main-nav" class="nav nav-tabs" style="margin-bottom:0;">
+            <li class="active"><a href="#classes" data-toggle="tab">Classes</a></li>
+            <li><a href="#modules" data-toggle="tab">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" placeholder="Type to filter APIs">
+        </div>
+
+        <div class="tab-content" style="border: 1px solid #DDD; border-top:0;">
+            <div class="tab-pane active" id="classes">
+                <ul id="api-classes" class="nav nav-list">
+                    
+                        <li><a href="../classes/Calendar.html">Calendar</a></li>
+                    
+                        <li><a href="../classes/CalendarEvent.html">CalendarEvent</a></li>
+                    
+                        <li><a href="../classes/DayView.html">DayView</a></li>
+                    
+                        <li><a href="../classes/EventEmitter.html">EventEmitter</a></li>
+                    
+                        <li><a href="../classes/Logger.html">Logger</a></li>
+                    
+                </ul>
+            </div>
+
+            <div class="tab-pane" id="modules">
+                <ul id="api-modules" class="nav nav-list">
+                    
+                        <li><a href="../modules/DayCalendar.html">DayCalendar</a></li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+        </div>
+        <div class="span9">
+                <form id="options-form" class="form-inline pull-right">
+        Show:
+        <label for="api-show-inherited" class="checkbox">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected" class="checkbox">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private" class="checkbox">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated" class="checkbox">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </form>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <div class="page-header">
+    <h1>public/js/lib/DayView.js <small>File</small></h1>
+</div>
+
+<div class="file">
+    <pre class="prettyprint linenums">
+/* global TMCD */
+&#x27;use strict&#x27;;
+
+
+/**
+ * DayView constructor
+ *
+ * @class  DayView
+ * @requires Logger
+ * @param {HTMLElement} domElement HTML container of the view.
+ * @constructor
+ */
+TMCD.DayView = function (domElement) {
+  var domStyles = window.getComputedStyle(domElement, null);
+
+  /**
+   * The HTML element containing the event elements.
+   *
+   * @property _elem
+   * @type HTMLElement
+   * @private
+   */
+  this._elem = domElement;
+
+  /**
+   * List of events contained within the layout.
+   *
+   * @property _events
+   * @type Array
+   * @private
+   */
+  this._events = [];
+
+  /**
+   * Meta information used to make layout calculations
+   *
+   * @property _layoutMeta
+   * @type {Object}
+   * @type {Number} _layoutMeta.yBase Base unit with wich to calculate y axis values.
+   * @type {Number} _layoutMeta.yOffset Distance to offset the vertical placement of events.
+   * @type {Number} _layoutMeta.xBase Base unit with wich to calculate x axis values.
+   * @type {Number} _layoutMeta.xOffset distance to offset the horizontal placement of events.
+   * @private
+   */
+  this._layoutMeta = {
+    yBase: parseInt(domStyles.height, 10) / (60 * 12), // container height / minutes * hours
+    yOffset: parseInt(domStyles.paddingTop, 10),
+    xBase: parseInt(domStyles.width, 10),
+    xOffset: parseInt(domStyles.paddingLeft, 10)
+  };
+
+};
+
+
+/**
+ * Process events to identify other events in the row and the columns they occupy and store the relationships.
+ *
+ * @param  {Object} eventMeta Event specific layout data.
+ * @private
+ * @return {Object} the updated eventMeta.
+ */
+TMCD.DayView.prototype._getNewEventRowData = function (eventMeta) {
+  var parallelEvent;
+
+  for (var i = 0; i &lt; this._events.length; i++) {
+    parallelEvent = this._events[i];
+    // proceed only if the compared events are parallel and we&#x27;re not comparing the new event to itself
+    if (this._events[i] !== eventMeta.event &amp;&amp; this._isParallel(eventMeta.event, parallelEvent.event)) {
+      // Update the neighbor lists in both events.
+      eventMeta.neighbors.push(i);
+      parallelEvent.neighbors.push(eventMeta.id);
+
+      // Store the occupied offset. If the the parallel items offset is available or the current iterations
+      // parallel item is wider than the already stored item&#x27;s width.
+      if (!(eventMeta.availableColumns[parallelEvent.column]) ||
+          this._events[eventMeta.availableColumns[parallelEvent.column]].width &lt;= parallelEvent.width) {
+            eventMeta.availableColumns[parallelEvent.column] = i;
+      }
+    }
+  }
+
+  return eventMeta;
+};
+
+
+/**
+ * Process the available columns to determine the first available column for the event to occupy and the total
+ * number of columns in this event&#x27;s row.
+ *
+ * @param  {Object} eventMeta Event specific layout data.
+ * @private
+ * @return {Object} the updated eventMeta.
+ */
+TMCD.DayView.prototype._getNewEventColumnData = function (eventMeta) {
+  // Add a slot to the end of the array to guarantee at least 1 available slot.
+  eventMeta.availableColumns.push(undefined);
+  for (var i = 0; i &lt; eventMeta.availableColumns.length; i++) {
+    if (typeof eventMeta.availableColumns[i] === &#x27;undefined&#x27;) {
+      eventMeta.column = i;
+      eventMeta.availableColumns[i] = eventMeta.id;
+      break;
+    }
+  }
+
+  // If the available offset increases the number of available slots, update the neighbors&#x27; widths.
+  if (eventMeta.column === eventMeta.availableColumns.length - 1) {
+    eventMeta.neighbors = this._updateNeighborColumns(eventMeta.neighbors, eventMeta.id);
+  }
+
+  if (typeof eventMeta.availableColumns[eventMeta.availableColumns.length - 1] === &#x27;undefined&#x27;) {
+    eventMeta.availableColumns.splice(eventMeta.availableColumns.length - 1, 1);
+  }
+
+  return eventMeta;
+};
+
+
+/**
+ * @TODO this function is a misnomer. the info is used to set the width, but this doesn&#x27;t represent the width
+ *       itself. Maybe the event property name needs to be changed.
+ *
+ * @param  {Array.CalendarEvent} neighbors List of events neighboring the newly added event.
+ * @param  {Number} id Id of the newly added event .
+ * @private
+ * @return {Array.CalendarEvent} the updated neighbors array.
+ */
+TMCD.DayView.prototype._updateNeighborColumns = function (neighbors, id) {
+  for (var i = 0; i &lt; neighbors.length; i++) {
+    TMCD.Logger.debug(&#x27;CalendarLayout.updateNeighborWidth&#x27;, this._events[neighbors[i]]);
+    this._events[neighbors[i]].availableColumns.push(id);
+  }
+  return neighbors;
+};
+
+
+/**
+ * Update the column display for the layout. This iterates over all events and sets their width and position
+ * left based on the column structure.
+ *
+ * @private
+ */
+TMCD.DayView.prototype._updateColumnDisplay = function () {
+  var left, updatedWidth;
+
+  for (var i = 0; i &lt; this._events.length; i++) {
+    updatedWidth = (this._layoutMeta.xBase - this._layoutMeta.xOffset * 2) /
+        this._events[i].availableColumns.length ;
+    left = updatedWidth * (this._events[i].column) + this._layoutMeta.xOffset;
+
+    this._events[i].event.setDisplay(&#x27;width&#x27;, updatedWidth + &#x27;px&#x27;);
+    this._events[i].event.setDisplay(&#x27;left&#x27;, left + &#x27;px&#x27;);
+  }
+};
+
+
+/**
+ * Comparison function to determine whether two events overlap.
+ *
+ * @param  {CalendarEvent}  a First calendar event to compare.
+ * @param  {CalendarEvent}  b Second calendar event to compare.
+ * @private
+ * @return {Boolean} returns true if the two events are parallel.
+ */
+TMCD.DayView.prototype._isParallel = function (a, b) {
+  return (a.start &gt;= b.start &amp;&amp; a.start &lt; b.end ||
+          a.start &lt; b.start &amp;&amp; a.end &gt;= b.start ||
+          a.start === b.start &amp;&amp; a.end === b.start);
+};
+
+
+/**
+ * Add an event to the layout by calculating the necessary spacial values.
+ *
+ * @param {CalendarEvent} newEvent Event to add to the layout.
+ */
+TMCD.DayView.prototype.addEventToLayout = function (newEvent) {
+  // Set the new event&#x27;s ID to the next available index and add it to the event list at the index value.
+  var eventIndex = this._events.length;
+  var eventMeta = {
+    event: newEvent,       // event object
+    column: 0,             // offsetX
+    availableColumns: [],  // width
+    neighbors: [],         // neighbors
+    id: eventIndex         // event id
+  };
+
+  // Set the event meta based on the neighbor data.
+  eventMeta = this._getNewEventRowData(eventMeta);
+
+  // Set the horizontal offset based on the first available slot.
+  eventMeta = this._getNewEventColumnData(eventMeta);
+
+  this._events[eventIndex] = eventMeta;
+
+  newEvent.setDisplay(&#x27;height&#x27;, (newEvent.end - newEvent.start) * 1 + &#x27;px&#x27;);
+  newEvent.setDisplay(&#x27;top&#x27;, newEvent.start * 1 + &#x27;px&#x27;);
+
+  this._updateColumnDisplay();
+
+  // Add the new event to the DOM only after the layout is updated to prevent any visible collisions.
+  this._elem.appendChild(newEvent.dom);
+};
+
+
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/jquery/jquery-1.8.2.min.js"></script>
+<script src="../assets/vendor/bootstrap/js/bootstrap.js"></script>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script src="../assets/js/yuidoc-bootstrap.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

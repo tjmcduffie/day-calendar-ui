@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>public/js/main.js - day-calendar-ui</title>
+    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="stylesheet" href="../assets/css/custom.css">
+    <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.css">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+</head>
+<body class="yui3-skin-sam">
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <h1 class="brand" style="padding: 10px 16px 10px; height: 20px; line-height: 20px; margin-left: 0;">
+        
+	    <img alt="day-calendar-ui" src="../assets/css/logo.png" style="max-height: 65%;" title="day-calendar-ui">
+        
+            day-calendar-ui
+        </h1>
+	<div class="nav">
+            <li class="divider-vertical"></li>
+            <li>
+                <p class="navbar-text">
+                    API Docs for Version: <b>0.0.0</b>
+                </p>
+            </li>
+        </div>
+        <form class="navbar-form pull-right" style="line-height: 40px; height: 40px;">
+            <input style="margin-top: 0;" type="text" class="search-query" placeholder="Search for classes/modules..." data-obj='["classes/Calendar", "classes/CalendarEvent", "classes/DayView", "classes/EventEmitter", "classes/Logger", "modules/DayCalendar"]'>
+        </form>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="span3">
+	    <div>
+    <h3>APIs</h3>
+    <div id="sidebar">
+        <ul id="main-nav" class="nav nav-tabs" style="margin-bottom:0;">
+            <li class="active"><a href="#classes" data-toggle="tab">Classes</a></li>
+            <li><a href="#modules" data-toggle="tab">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" placeholder="Type to filter APIs">
+        </div>
+
+        <div class="tab-content" style="border: 1px solid #DDD; border-top:0;">
+            <div class="tab-pane active" id="classes">
+                <ul id="api-classes" class="nav nav-list">
+                    
+                        <li><a href="../classes/Calendar.html">Calendar</a></li>
+                    
+                        <li><a href="../classes/CalendarEvent.html">CalendarEvent</a></li>
+                    
+                        <li><a href="../classes/DayView.html">DayView</a></li>
+                    
+                        <li><a href="../classes/EventEmitter.html">EventEmitter</a></li>
+                    
+                        <li><a href="../classes/Logger.html">Logger</a></li>
+                    
+                </ul>
+            </div>
+
+            <div class="tab-pane" id="modules">
+                <ul id="api-modules" class="nav nav-list">
+                    
+                        <li><a href="../modules/DayCalendar.html">DayCalendar</a></li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+        </div>
+        <div class="span9">
+                <form id="options-form" class="form-inline pull-right">
+        Show:
+        <label for="api-show-inherited" class="checkbox">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected" class="checkbox">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private" class="checkbox">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated" class="checkbox">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </form>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <div class="page-header">
+    <h1>public/js/main.js <small>File</small></h1>
+</div>
+
+<div class="file">
+    <pre class="prettyprint linenums">
+/* jshint browser: true, sub: true */
+/* global TMCD */
+/**
+ * DayCalendar creates the UI behaviors and logic for managing the day view of the Calendar.
+ *
+ * @module DayCalendar
+ * @requires TMCD
+ * @main
+ */
+ &#x27;use strict&#x27;;
+
+(function() {
+  TMCD.Logger.setOption(&#x27;REPORT_LEVEL&#x27;, TMCD.Logger.reportLevel.ERROR);
+
+  var calendar = new TMCD.Calendar(&#x27;day&#x27;, document.querySelector(&#x27;.events&#x27;));
+  TMCD.dayCalendar = calendar; // exposing for debugging
+
+  var observer = new TMCD.EventEmitter();
+  observer.listen(&#x27;Calendar.event.add&#x27;, calendar.createEvents.bind(calendar));
+
+  // Global API
+  /**
+   * Create a series of events based based on the supplied array. This method calls through to the
+   * internal interface responsible for managing the calendar.
+   *
+   * @method layOutDay
+   * @param Array.&lt;Object&gt;.number events List of event configurations used to create events on the
+   *                                     calendar view.
+   */
+  window[&#x27;layOutDay&#x27;] = function (events) {
+    observer.broadcast(&#x27;Calendar.event.add&#x27;, events);
+  };
+}());
+
+
+window[&#x27;layOutDay&#x27;]([
+  {start: 30, end: 150},
+  {start: 540, end: 600},
+  {start: 560, end: 620},
+  {start: 610, end: 670},
+  {start: 60, end: 120},
+  {start: 60, end: 150},
+  {start: 120, end: 150},
+  {start: 240, end: 300},
+  {start: 310, end: 400},
+  {start: 320, end: 410},
+  {start: 330, end: 420},
+  {start: 340, end: 430},
+  {start: 350, end: 440},
+  {start: 360, end: 450},
+  {start: 370, end: 460},
+  {start: 380, end: 470},
+  {start: 390, end: 480},
+  {start: 400, end: 490},
+  {start: 410, end: 500},
+  {start: 420, end: 510},
+  {start: 430, end: 520},
+  {start: 440, end: 530},
+  {start: 450, end: 540},
+  {start: 460, end: 550},
+  {start: 470, end: 560},
+  {start: 1, end: 720}
+]);
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/jquery/jquery-1.8.2.min.js"></script>
+<script src="../assets/vendor/bootstrap/js/bootstrap.js"></script>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script src="../assets/js/yuidoc-bootstrap.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

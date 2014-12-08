@@ -1,0 +1,897 @@
+{
+    "project": {
+        "name": "day-calendar-ui",
+        "description": "",
+        "version": "0.0.0"
+    },
+    "files": {
+        "public/js/lib/Calendar.js": {
+            "name": "public/js/lib/Calendar.js",
+            "modules": {},
+            "classes": {
+                "Calendar": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "public/js/lib/CalendarEvent.js": {
+            "name": "public/js/lib/CalendarEvent.js",
+            "modules": {},
+            "classes": {
+                "CalendarEvent": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "public/js/lib/DayView.js": {
+            "name": "public/js/lib/DayView.js",
+            "modules": {},
+            "classes": {
+                "DayView": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "public/js/lib/EventEmitter.js": {
+            "name": "public/js/lib/EventEmitter.js",
+            "modules": {},
+            "classes": {
+                "EventEmitter": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "public/js/lib/Logger.js": {
+            "name": "public/js/lib/Logger.js",
+            "modules": {},
+            "classes": {
+                "Logger": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "public/js/lib/TMCD.js": {
+            "name": "public/js/lib/TMCD.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "public/js/polyfill/function.js": {
+            "name": "public/js/polyfill/function.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "public/js/polyfill/string.js": {
+            "name": "public/js/polyfill/string.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "public/js/vendor/jasmine/lib/jasmine-2.0.3/boot.js": {
+            "name": "public/js/vendor/jasmine/lib/jasmine-2.0.3/boot.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "public/js/main.js": {
+            "name": "public/js/main.js",
+            "modules": {
+                "DayCalendar": 1
+            },
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {
+        "DayCalendar": {
+            "name": "DayCalendar",
+            "submodules": {},
+            "classes": {
+                "Calendar": 1,
+                "CalendarEvent": 1,
+                "DayView": 1,
+                "EventEmitter": 1,
+                "Logger": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "public/js/lib/Logger.js",
+            "line": 6,
+            "description": "DayCalendar creates the UI behaviors and logic for managing the day view of the Calendar.",
+            "requires": [
+                "TMCD"
+            ],
+            "itemtype": "main"
+        }
+    },
+    "classes": {
+        "Calendar": {
+            "name": "Calendar",
+            "shortname": "Calendar",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "DayCalendar",
+            "file": "public/js/lib/Calendar.js",
+            "line": 5,
+            "description": "The calendar oject manages the calendar's public API and View states.",
+            "requires": [
+                "Logger",
+                "CalendarEvent",
+                "DayView"
+            ],
+            "params": [
+                {
+                    "name": "domElement",
+                    "description": "",
+                    "type": "HTMLElement"
+                },
+                {
+                    "name": "viewType",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "is_constructor": 1
+        },
+        "CalendarEvent": {
+            "name": "CalendarEvent",
+            "shortname": "CalendarEvent",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "DayCalendar",
+            "file": "public/js/lib/CalendarEvent.js",
+            "line": 5,
+            "description": "CalendarEvent constructor for individual calendar events.",
+            "requires": [
+                "Logger"
+            ],
+            "params": [
+                {
+                    "name": "options",
+                    "description": "Configuration options for the event.",
+                    "type": "Object",
+                    "props": [
+                        {
+                            "name": "start",
+                            "description": "Event start time.",
+                            "type": "Object"
+                        },
+                        {
+                            "name": "end",
+                            "description": "Event end time.",
+                            "type": "Object"
+                        }
+                    ]
+                }
+            ],
+            "is_constructor": 1
+        },
+        "DayView": {
+            "name": "DayView",
+            "shortname": "DayView",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "DayCalendar",
+            "file": "public/js/lib/DayView.js",
+            "line": 5,
+            "description": "DayView constructor",
+            "requires": [
+                "Logger"
+            ],
+            "params": [
+                {
+                    "name": "domElement",
+                    "description": "HTML container of the view.",
+                    "type": "HTMLElement"
+                }
+            ],
+            "is_constructor": 1
+        },
+        "EventEmitter": {
+            "name": "EventEmitter",
+            "shortname": "EventEmitter",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "DayCalendar",
+            "file": "public/js/lib/EventEmitter.js",
+            "line": 5,
+            "description": "EventEmitter class constructor constructs a new instance of the class with a clean events array.",
+            "requires": [
+                "Logger"
+            ],
+            "is_constructor": 1
+        },
+        "Logger": {
+            "name": "Logger",
+            "shortname": "Logger",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "DayCalendar",
+            "file": "public/js/lib/Logger.js",
+            "line": 6,
+            "description": "Logger object allowing modules to send messages to the appropriate destination. Currently this only sends\nmessages to the console, however it can be easily extended to sed messages to a service for saving or\nfurther communication.",
+            "static": 1
+        }
+    },
+    "classitems": [
+        {
+            "file": "public/js/lib/Calendar.js",
+            "line": 18,
+            "description": "Calendar container element.",
+            "itemtype": "property",
+            "name": "_elem",
+            "type": "{HTMLElement}",
+            "access": "private",
+            "tagname": "",
+            "class": "Calendar"
+        },
+        {
+            "file": "public/js/lib/Calendar.js",
+            "line": 27,
+            "description": "View module type.",
+            "itemtype": "property",
+            "name": "_view",
+            "type": "{Mixed}",
+            "access": "private",
+            "tagname": "",
+            "class": "Calendar"
+        },
+        {
+            "file": "public/js/lib/Calendar.js",
+            "line": 36,
+            "description": "List of events contained in the view.",
+            "itemtype": "property",
+            "name": "_events",
+            "type": "{Array.CalendarEvent}",
+            "access": "private",
+            "tagname": "",
+            "class": "Calendar"
+        },
+        {
+            "file": "public/js/lib/Calendar.js",
+            "line": 57,
+            "description": "Views enum. Contains a mapping of view types to view objects.",
+            "itemtype": "property",
+            "name": "views",
+            "readonly": "",
+            "type": "{Enum}",
+            "static": 1,
+            "class": "Calendar"
+        },
+        {
+            "file": "public/js/lib/Calendar.js",
+            "line": 70,
+            "description": "Set the current view for the calenday. If additional tasks are associated with setting a view such as\nrendering a container template, this is where those calls should happen.",
+            "itemtype": "method",
+            "name": "_setView",
+            "params": [
+                {
+                    "name": "ViewConstructor",
+                    "description": "View constructor stored on the views enum.",
+                    "type": "Mixed"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "Calendar"
+        },
+        {
+            "file": "public/js/lib/Calendar.js",
+            "line": 83,
+            "description": "Creates calendar events based on the supplied configurations and broadcasts a notification of their\ncreation for sub or external modules to respond.",
+            "itemtype": "method",
+            "name": "createEvents",
+            "params": [
+                {
+                    "name": "events",
+                    "description": "A list of configurations used to create events and add them to the calendar.",
+                    "type": "Array"
+                }
+            ],
+            "class": "Calendar"
+        },
+        {
+            "file": "public/js/lib/CalendarEvent.js",
+            "line": 36,
+            "description": "Time at which the event starts. Time should be measured in number of minutes since the start of the day.",
+            "itemtype": "property",
+            "name": "start",
+            "type": "{Number}",
+            "class": "CalendarEvent"
+        },
+        {
+            "file": "public/js/lib/CalendarEvent.js",
+            "line": 44,
+            "description": "Time at which the event ends. Time should be measured in number of minutes since the start of the day.",
+            "itemtype": "property",
+            "name": "end",
+            "type": "{Number}",
+            "class": "CalendarEvent"
+        },
+        {
+            "file": "public/js/lib/CalendarEvent.js",
+            "line": 52,
+            "description": "The dom representation of the element.",
+            "itemtype": "property",
+            "name": "dom",
+            "type": "{HTMLElement}",
+            "class": "CalendarEvent"
+        },
+        {
+            "file": "public/js/lib/CalendarEvent.js",
+            "line": 63,
+            "description": "Render the events HTML template. This only runs once and before returning the element, replaces itself\nwith a non operational function.",
+            "itemtype": "method",
+            "name": "_render",
+            "return": {
+                "description": "Html representation of the calendar event.",
+                "type": "HTMLElement"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "CalendarEvent"
+        },
+        {
+            "file": "public/js/lib/CalendarEvent.js",
+            "line": 87,
+            "description": "Set the current view for the calenday. If additional tasks are associated with setting a view such as\nrendering a container template, this is where those calls should happen.",
+            "itemtype": "method",
+            "name": "setDisplay",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "Name of the display property to set. Should correspond to a style property.",
+                    "type": "String"
+                },
+                {
+                    "name": "value",
+                    "description": "Value of the style property",
+                    "type": "String|Number"
+                }
+            ],
+            "class": "CalendarEvent"
+        },
+        {
+            "file": "public/js/lib/DayView.js",
+            "line": 16,
+            "description": "The HTML element containing the event elements.",
+            "itemtype": "property",
+            "name": "_elem",
+            "type": "HTMLElement",
+            "access": "private",
+            "tagname": "",
+            "class": "DayView"
+        },
+        {
+            "file": "public/js/lib/DayView.js",
+            "line": 25,
+            "description": "List of events contained within the layout.",
+            "itemtype": "property",
+            "name": "_events",
+            "type": "Array",
+            "access": "private",
+            "tagname": "",
+            "class": "DayView"
+        },
+        {
+            "file": "public/js/lib/DayView.js",
+            "line": 34,
+            "description": "Meta information used to make layout calculations",
+            "itemtype": "property",
+            "name": "_layoutMeta",
+            "type": "{Number} _layoutMeta.xOffset distance to offset the horizontal placement of events.",
+            "access": "private",
+            "tagname": "",
+            "class": "DayView"
+        },
+        {
+            "file": "public/js/lib/DayView.js",
+            "line": 55,
+            "description": "Process events to identify other events in the row and the columns they occupy and store the relationships.",
+            "params": [
+                {
+                    "name": "eventMeta",
+                    "description": "Event specific layout data.",
+                    "type": "Object"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "return": {
+                "description": "the updated eventMeta.",
+                "type": "Object"
+            },
+            "class": "DayView"
+        },
+        {
+            "file": "public/js/lib/DayView.js",
+            "line": 86,
+            "description": "Process the available columns to determine the first available column for the event to occupy and the total\nnumber of columns in this event's row.",
+            "params": [
+                {
+                    "name": "eventMeta",
+                    "description": "Event specific layout data.",
+                    "type": "Object"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "return": {
+                "description": "the updated eventMeta.",
+                "type": "Object"
+            },
+            "class": "DayView"
+        },
+        {
+            "file": "public/js/lib/DayView.js",
+            "line": 118,
+            "todo": [
+                "this function is a misnomer. the info is used to set the width",
+                "but this doesn't represent the width\n      itself. Maybe the event property name needs to be changed."
+            ],
+            "params": [
+                {
+                    "name": "neighbors",
+                    "description": "List of events neighboring the newly added event.",
+                    "type": "Array.CalendarEvent"
+                },
+                {
+                    "name": "id",
+                    "description": "Id of the newly added event .",
+                    "type": "Number"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "return": {
+                "description": "the updated neighbors array.",
+                "type": "Array.CalendarEvent"
+            },
+            "class": "DayView"
+        },
+        {
+            "file": "public/js/lib/DayView.js",
+            "line": 136,
+            "description": "Update the column display for the layout. This iterates over all events and sets their width and position\nleft based on the column structure.",
+            "access": "private",
+            "tagname": "",
+            "class": "DayView"
+        },
+        {
+            "file": "public/js/lib/DayView.js",
+            "line": 156,
+            "description": "Comparison function to determine whether two events overlap.",
+            "params": [
+                {
+                    "name": "a",
+                    "description": "First calendar event to compare.",
+                    "type": "CalendarEvent"
+                },
+                {
+                    "name": "b",
+                    "description": "Second calendar event to compare.",
+                    "type": "CalendarEvent"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "return": {
+                "description": "returns true if the two events are parallel.",
+                "type": "Boolean"
+            },
+            "class": "DayView"
+        },
+        {
+            "file": "public/js/lib/DayView.js",
+            "line": 171,
+            "description": "Add an event to the layout by calculating the necessary spacial values.",
+            "params": [
+                {
+                    "name": "newEvent",
+                    "description": "Event to add to the layout.",
+                    "type": "CalendarEvent"
+                }
+            ],
+            "class": "DayView"
+        },
+        {
+            "file": "public/js/lib/EventEmitter.js",
+            "line": 14,
+            "description": "Map of events and their associated callbacks.",
+            "itemtype": "property",
+            "name": "_events",
+            "type": "{Object}",
+            "access": "private",
+            "tagname": "",
+            "class": "EventEmitter"
+        },
+        {
+            "file": "public/js/lib/EventEmitter.js",
+            "line": 26,
+            "description": "Associates a method to an event. Each method is added to the end of the events array.",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "Name of the event to which the method should be associated.",
+                    "type": "String"
+                },
+                {
+                    "name": "callback",
+                    "description": "The method to bind to the event.",
+                    "type": "Function"
+                }
+            ],
+            "return": {
+                "description": "An array containing the event name at key 0 and the subscribed method at key 1. This is\n                useful for ignoring an event/method combination.",
+                "type": "Array"
+            },
+            "class": "EventEmitter"
+        },
+        {
+            "file": "public/js/lib/EventEmitter.js",
+            "line": 59,
+            "description": "Disassociate a method from an event. The method received must match the bound method exactly. This can be\ncause issues when passing anonymous metods. In this case use the results returned from the listen method.",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "Name of the event from which the method should be disassociated.",
+                    "type": "String"
+                },
+                {
+                    "name": "callback",
+                    "description": "The method to remove from the event.",
+                    "type": "Function"
+                }
+            ],
+            "return": {
+                "description": "An array containing the event name at key 0 and the disassociated method at\n                          key 1.",
+                "type": "Array|Undefined"
+            },
+            "class": "EventEmitter"
+        },
+        {
+            "file": "public/js/lib/EventEmitter.js",
+            "line": 102,
+            "description": "Trigger the specified event, executing any associated methods and passing data as only attribute.",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "Name of the event to trigger.",
+                    "type": "String"
+                },
+                {
+                    "name": "data",
+                    "description": "Optional argument containing data to pass to each associated method.",
+                    "type": "Mixed",
+                    "optional": true
+                }
+            ],
+            "class": "EventEmitter"
+        },
+        {
+            "file": "public/js/lib/Logger.js",
+            "line": 18,
+            "description": "The report level matrix. This should be used for all log level setting or comparison. When changing the\nreporting level, be aware that only messages with a greater or equal priority are output. The priority\norder from lowest to high is as follows:\n<ol>\n  <li><strong>DEBUG</strong> - handle all messages</li>\n  <li><strong>WARN</strong> - handle warnings and errors messages</li>\n  <li><strong>ERROR</strong>- handle errors messages</li>\n  <li><strong>NONE</strong> - suppress all messages</li>\n</ol>",
+            "itemtype": "property",
+            "name": "reportLevel",
+            "type": "{Enum}",
+            "readonly": "",
+            "class": "Logger"
+        },
+        {
+            "file": "public/js/lib/Logger.js",
+            "line": 41,
+            "description": "Map of option properties and values. Property naems must be strings and refernced using array notation to\nprevent issues from obfuscation.",
+            "itemtype": "property",
+            "name": "options",
+            "type": "{Object}",
+            "static": 1,
+            "class": "Logger"
+        },
+        {
+            "file": "public/js/lib/Logger.js",
+            "line": 54,
+            "description": "Sets an option for the logging service.",
+            "itemtype": "method",
+            "name": "setOption",
+            "params": [
+                {
+                    "name": "key",
+                    "description": "Name of the option to set.",
+                    "type": "String"
+                },
+                {
+                    "name": "value",
+                    "description": "Value of the option.",
+                    "type": "Mixed"
+                }
+            ],
+            "class": "Logger"
+        },
+        {
+            "file": "public/js/lib/Logger.js",
+            "line": 69,
+            "description": "Handles a message sent with a priority of 'debug'. Only executes if the priority is set to DEBUG.",
+            "itemtype": "method",
+            "name": "debug",
+            "params": [
+                {
+                    "name": "...args",
+                    "description": "Argments passed to console.log",
+                    "type": "Mixed",
+                    "optional": true
+                }
+            ],
+            "static": 1,
+            "class": "Logger"
+        },
+        {
+            "file": "public/js/lib/Logger.js",
+            "line": 83,
+            "description": "Handles a message sent with a priority of 'warn'. Only executes if the priority is set to WARN or lower.",
+            "itemtype": "method",
+            "name": "warn",
+            "params": [
+                {
+                    "name": "...args",
+                    "description": "Argments passed to console.warn",
+                    "type": "Mixed",
+                    "optional": true
+                }
+            ],
+            "static": 1,
+            "class": "Logger"
+        },
+        {
+            "file": "public/js/lib/Logger.js",
+            "line": 97,
+            "description": "Handles a message sent with a priority of 'error'. Only executes if the priority is set to ERROR or lower.",
+            "itemtype": "method",
+            "name": "error",
+            "params": [
+                {
+                    "name": "...args",
+                    "description": "Argments passed to console.error",
+                    "type": "Mixed",
+                    "optional": true
+                }
+            ],
+            "static": 1,
+            "class": "Logger"
+        },
+        {
+            "file": "public/js/lib/TMCD.js",
+            "line": 5,
+            "class": ""
+        },
+        {
+            "file": "public/js/polyfill/function.js",
+            "line": 2,
+            "description": "Polyfill for Function.prototype.bind. This ES5 method is unsupported in IE8 and below, PhantomJS and\nlegacy versions of other browsers.\nhttps://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind#Polyfill",
+            "class": ""
+        },
+        {
+            "file": "public/js/polyfill/string.js",
+            "line": 2,
+            "description": "Polyfill for String.prototype.trim. This ES5 method is unsupported in IE8 and below, PhantomJS and\nlegacy versions of other browsers.\nhttps://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/Trim#Polyfill",
+            "class": ""
+        },
+        {
+            "file": "public/js/vendor/jasmine/lib/jasmine-2.0.3/boot.js",
+            "line": 1,
+            "description": "Starting with version 2.0, this file \"boots\" Jasmine, performing all of the necessary initialization before executing the loaded environment and all of a project's specs. This file should be loaded after `jasmine.js`, but before any project source files or spec files are loaded. Thus this file can also be used to customize Jasmine for a project.\n\nIf a project is using Jasmine via the standalone distribution, this file can be customized directly. If a project is using Jasmine via the [Ruby gem][jasmine-gem], this file can be copied into the support directory via `jasmine copy_boot_js`. Other environments (e.g., Python) will have different mechanisms.\n\nThe location of `boot.js` can be specified and/or overridden in `jasmine.yml`.\n\n[jasmine-gem]: http://github.com/pivotal/jasmine-gem",
+            "class": ""
+        },
+        {
+            "file": "public/js/vendor/jasmine/lib/jasmine-2.0.3/boot.js",
+            "line": 13,
+            "description": "## Require &amp; Instantiate\n\nRequire Jasmine's core files. Specifically, this requires and attaches all of Jasmine's code to the `jasmine` reference.",
+            "class": ""
+        },
+        {
+            "file": "public/js/vendor/jasmine/lib/jasmine-2.0.3/boot.js",
+            "line": 20,
+            "description": "Since this is being run in a browser and the results should populate to an HTML page, require the HTML-specific Jasmine code, injecting the same reference.",
+            "class": ""
+        },
+        {
+            "file": "public/js/vendor/jasmine/lib/jasmine-2.0.3/boot.js",
+            "line": 25,
+            "description": "Create the Jasmine environment. This is used to run all specs in a project.",
+            "class": ""
+        },
+        {
+            "file": "public/js/vendor/jasmine/lib/jasmine-2.0.3/boot.js",
+            "line": 30,
+            "description": "## The Global Interface\n\nBuild up the functions that will be exposed as the Jasmine public interface. A project can customize, rename or alias any of these functions as desired, provided the implementation remains unchanged.",
+            "class": ""
+        },
+        {
+            "file": "public/js/vendor/jasmine/lib/jasmine-2.0.3/boot.js",
+            "line": 37,
+            "description": "Add all of the Jasmine global/public interface to the proper global, so a project can use the public interface directly. For example, calling `describe` in specs instead of `jasmine.getEnv().describe`.",
+            "class": ""
+        },
+        {
+            "file": "public/js/vendor/jasmine/lib/jasmine-2.0.3/boot.js",
+            "line": 46,
+            "description": "## Runner Parameters\n\nMore browser specific code - wrap the query string in an object and to allow for getting/setting parameters from the runner user interface.",
+            "class": ""
+        },
+        {
+            "file": "public/js/vendor/jasmine/lib/jasmine-2.0.3/boot.js",
+            "line": 59,
+            "description": "## Reporters\nThe `HtmlReporter` builds all of the HTML UI for the runner page. This reporter paints the dots, stars, and x's for specs, as well as all spec names and all failures (if any).",
+            "class": ""
+        },
+        {
+            "file": "public/js/vendor/jasmine/lib/jasmine-2.0.3/boot.js",
+            "line": 72,
+            "description": "The `jsApiReporter` also receives spec results, and is used by any environment that needs to extract the results  from JavaScript.",
+            "class": ""
+        },
+        {
+            "file": "public/js/vendor/jasmine/lib/jasmine-2.0.3/boot.js",
+            "line": 78,
+            "description": "Filter which specs will be run by matching the start of the full name against the `spec` query param.",
+            "class": ""
+        },
+        {
+            "file": "public/js/vendor/jasmine/lib/jasmine-2.0.3/boot.js",
+            "line": 89,
+            "description": "Setting up timing functions to be able to be overridden. Certain browsers (Safari, IE 8, phantomjs) require this hack.",
+            "class": ""
+        },
+        {
+            "file": "public/js/vendor/jasmine/lib/jasmine-2.0.3/boot.js",
+            "line": 97,
+            "description": "## Execution\n\nReplace the browser window's `onload`, ensure it's called, and then run all of the loaded specs. This includes initializing the `HtmlReporter` instance and then executing the loaded Jasmine environment. All of this will happen after all of the specs are loaded.",
+            "class": ""
+        },
+        {
+            "file": "public/js/vendor/jasmine/lib/jasmine-2.0.3/boot.js",
+            "line": 112,
+            "description": "Helper function for readability above.",
+            "class": ""
+        },
+        {
+            "file": "public/js/main.js",
+            "line": 22,
+            "description": "Create a series of events based based on the supplied array. This method calls through to the\ninternal interface responsible for managing the calendar.",
+            "itemtype": "method",
+            "name": "layOutDay",
+            "params": [
+                {
+                    "name": "Array.<Object>.number",
+                    "description": "events List of event configurations used to create events on the\n                                    calendar view."
+                }
+            ],
+            "class": "",
+            "module": "DayCalendar"
+        }
+    ],
+    "warnings": [
+        {
+            "message": "Missing item type\nProcess events to identify other events in the row and the columns they occupy and store the relationships.",
+            "line": " public/js/lib/DayView.js:55"
+        },
+        {
+            "message": "Missing item type\nProcess the available columns to determine the first available column for the event to occupy and the total\nnumber of columns in this event's row.",
+            "line": " public/js/lib/DayView.js:86"
+        },
+        {
+            "message": "Missing item type",
+            "line": " public/js/lib/DayView.js:118"
+        },
+        {
+            "message": "Missing item type\nUpdate the column display for the layout. This iterates over all events and sets their width and position\nleft based on the column structure.",
+            "line": " public/js/lib/DayView.js:136"
+        },
+        {
+            "message": "Missing item type\nComparison function to determine whether two events overlap.",
+            "line": " public/js/lib/DayView.js:156"
+        },
+        {
+            "message": "Missing item type\nAdd an event to the layout by calculating the necessary spacial values.",
+            "line": " public/js/lib/DayView.js:171"
+        },
+        {
+            "message": "Missing item type\nAssociates a method to an event. Each method is added to the end of the events array.",
+            "line": " public/js/lib/EventEmitter.js:26"
+        },
+        {
+            "message": "Missing item type\nDisassociate a method from an event. The method received must match the bound method exactly. This can be\ncause issues when passing anonymous metods. In this case use the results returned from the listen method.",
+            "line": " public/js/lib/EventEmitter.js:59"
+        },
+        {
+            "message": "Missing item type\nTrigger the specified event, executing any associated methods and passing data as only attribute.",
+            "line": " public/js/lib/EventEmitter.js:102"
+        },
+        {
+            "message": "Missing item type",
+            "line": " public/js/lib/TMCD.js:5"
+        },
+        {
+            "message": "Missing item type\nPolyfill for Function.prototype.bind. This ES5 method is unsupported in IE8 and below, PhantomJS and\nlegacy versions of other browsers.\nhttps://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind#Polyfill",
+            "line": " public/js/polyfill/function.js:2"
+        },
+        {
+            "message": "Missing item type\nPolyfill for String.prototype.trim. This ES5 method is unsupported in IE8 and below, PhantomJS and\nlegacy versions of other browsers.\nhttps://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/Trim#Polyfill",
+            "line": " public/js/polyfill/string.js:2"
+        },
+        {
+            "message": "Missing item type\nStarting with version 2.0, this file \"boots\" Jasmine, performing all of the necessary initialization before executing the loaded environment and all of a project's specs. This file should be loaded after `jasmine.js`, but before any project source files or spec files are loaded. Thus this file can also be used to customize Jasmine for a project.\n\nIf a project is using Jasmine via the standalone distribution, this file can be customized directly. If a project is using Jasmine via the [Ruby gem][jasmine-gem], this file can be copied into the support directory via `jasmine copy_boot_js`. Other environments (e.g., Python) will have different mechanisms.\n\nThe location of `boot.js` can be specified and/or overridden in `jasmine.yml`.\n\n[jasmine-gem]: http://github.com/pivotal/jasmine-gem",
+            "line": " public/js/vendor/jasmine/lib/jasmine-2.0.3/boot.js:1"
+        },
+        {
+            "message": "Missing item type\n## Require &amp; Instantiate\n\nRequire Jasmine's core files. Specifically, this requires and attaches all of Jasmine's code to the `jasmine` reference.",
+            "line": " public/js/vendor/jasmine/lib/jasmine-2.0.3/boot.js:13"
+        },
+        {
+            "message": "Missing item type\nSince this is being run in a browser and the results should populate to an HTML page, require the HTML-specific Jasmine code, injecting the same reference.",
+            "line": " public/js/vendor/jasmine/lib/jasmine-2.0.3/boot.js:20"
+        },
+        {
+            "message": "Missing item type\nCreate the Jasmine environment. This is used to run all specs in a project.",
+            "line": " public/js/vendor/jasmine/lib/jasmine-2.0.3/boot.js:25"
+        },
+        {
+            "message": "Missing item type\n## The Global Interface\n\nBuild up the functions that will be exposed as the Jasmine public interface. A project can customize, rename or alias any of these functions as desired, provided the implementation remains unchanged.",
+            "line": " public/js/vendor/jasmine/lib/jasmine-2.0.3/boot.js:30"
+        },
+        {
+            "message": "Missing item type\nAdd all of the Jasmine global/public interface to the proper global, so a project can use the public interface directly. For example, calling `describe` in specs instead of `jasmine.getEnv().describe`.",
+            "line": " public/js/vendor/jasmine/lib/jasmine-2.0.3/boot.js:37"
+        },
+        {
+            "message": "Missing item type\n## Runner Parameters\n\nMore browser specific code - wrap the query string in an object and to allow for getting/setting parameters from the runner user interface.",
+            "line": " public/js/vendor/jasmine/lib/jasmine-2.0.3/boot.js:46"
+        },
+        {
+            "message": "Missing item type\n## Reporters\nThe `HtmlReporter` builds all of the HTML UI for the runner page. This reporter paints the dots, stars, and x's for specs, as well as all spec names and all failures (if any).",
+            "line": " public/js/vendor/jasmine/lib/jasmine-2.0.3/boot.js:59"
+        },
+        {
+            "message": "Missing item type\nThe `jsApiReporter` also receives spec results, and is used by any environment that needs to extract the results  from JavaScript.",
+            "line": " public/js/vendor/jasmine/lib/jasmine-2.0.3/boot.js:72"
+        },
+        {
+            "message": "Missing item type\nFilter which specs will be run by matching the start of the full name against the `spec` query param.",
+            "line": " public/js/vendor/jasmine/lib/jasmine-2.0.3/boot.js:78"
+        },
+        {
+            "message": "Missing item type\nSetting up timing functions to be able to be overridden. Certain browsers (Safari, IE 8, phantomjs) require this hack.",
+            "line": " public/js/vendor/jasmine/lib/jasmine-2.0.3/boot.js:89"
+        },
+        {
+            "message": "Missing item type\n## Execution\n\nReplace the browser window's `onload`, ensure it's called, and then run all of the loaded specs. This includes initializing the `HtmlReporter` instance and then executing the loaded Jasmine environment. All of this will happen after all of the specs are loaded.",
+            "line": " public/js/vendor/jasmine/lib/jasmine-2.0.3/boot.js:97"
+        },
+        {
+            "message": "Missing item type\nHelper function for readability above.",
+            "line": " public/js/vendor/jasmine/lib/jasmine-2.0.3/boot.js:112"
+        }
+    ]
+}
