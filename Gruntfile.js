@@ -38,6 +38,9 @@ module.exports = function(grunt) {
         src: ['Gruntfile.js']
       },
       client: {
+        options: {
+          browser: true
+        },
         src: ['public/js/{,**/}*.js', '!public/js/vendor/{,**/}*.js', '!public/js/polyfill/{,**/}*.js']
       },
       spec: {
