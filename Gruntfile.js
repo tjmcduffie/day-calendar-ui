@@ -166,6 +166,23 @@ module.exports = function(grunt) {
       }
     },
 
+    compress: {
+      versioned: {
+        options: {
+          archive: 'build/<%= pkg.name %>-<%= pkg.version %>.zip',
+          mode: 'zip'
+        },
+        files: [{ src: 'public/**' }]
+      },
+      current: {
+        options: {
+          archive: 'build/<%= pkg.name %>-current.zip',
+          mode: 'zip'
+        },
+        files: [{ src: 'public/**' }]
+      }
+    },
+
     watch: {
       gruntfile: {
         files: '<%= jshint.gruntfile.src %>',
