@@ -1,49 +1,41 @@
-/* jshint browser: true */
+/* jshint browser: true, sub: true */
+/* global TMCD */
+/**
+ * DayCalendar creates the UI behaviors and logic for managing the day view of the Calendar.
+ *
+ * @module DayCalendar
+ * @requires TMCD
+ * @main
+ */
+ 'use strict';
+
 (function() {
-  'use strict';
+  TMCD.Logger.setOption('REPORT_LEVEL', TMCD.Logger.reportLevel.ERROR);
 
-  var slides;
-  var classNames = {
-    PREV: 'previous',
-    CURR: 'current',
-    NEXT: 'next'
+  var calendar = new TMCD.Calendar('day', document.querySelector('.events'));
+  TMCD.dayCalendar = calendar; // exposing for debugging
+
+  var observer = new TMCD.EventEmitter();
+  observer.listen('Calendar.event.add', calendar.createEvents.bind(calendar));
+
+  // Global API
+  /**
+   * Create a series of events based based on the supplied array. This method calls through to the
+   * internal interface responsible for managing the calendar.
+   *
+   * @method layOutDay
+   * @param Array.<Object>.number events List of event configurations used to create events on the
+   *                                     calendar view.
+   */
+  window['layOutDay'] = function (events) {
+    observer.broadcast('Calendar.event.add', events);
   };
-
-  writeSlideCss();
-  manageSlideTransition();
-
-  // make the slides fillscreen
-  function writeSlideCss() {
-    var viewportSize = {
-      x: window.innerWidth,
-      y: window.innerHeight
-    };
-    var styleCSS = document.createElement('style');
-    styleCSS.id = 'style-css';
-    styleCSS.innerHTML = '.slide { height: ' + viewportSize.y + 'px; width: ' + viewportSize.x + 'px; }';
-    document.body.appendChild(styleCSS);
-    console.log('style rlement written');
-  }
-
-  function manageSlideTransition() {
-    slides = document.querySelectorAll('section.slide');
-    console.log(slides);
-    Array.prototype.forEach.call(slides, function(elem, index) {
-      var className = classNames.NEXT;
-      if (index === 0) {
-        className = classNames.CURR;
-      }
-      elem.classList.add(className);
-    });
-  }
-
-  // function mapSlides() {
-
-  // };
-
-  // function handleScroll() {
-  //   document.addEventListener('scroll', function() {
-
-  //   });
-  // };
 }());
+
+
+window['layOutDay']([
+  {start: 30, end: 150},
+  {start: 540, end: 600},
+  {start: 560, end: 620},
+  {start: 610, end: 670}
+]);
