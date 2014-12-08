@@ -19,9 +19,13 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      // 'components/jquery/dist/jquery.js',
-      'public/js/lib/{,**/}*.js',
-      // 'public/js/main.js',
+      'public/js/polyfill/function.js',
+      'public/js/lib/TMCD.js',
+      'public/js/lib/Logger.js',
+      'public/js/lib/EventEmitter.js',
+      'public/js/lib/CalendarEvent.js',
+      'public/js/lib/DayView.js',
+      'public/js/lib/Calendar.js',
       'spec/unit/{,**/}*.js'
     ],
 
@@ -41,13 +45,17 @@ module.exports = function(config) {
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress'],
+    reporters: ['progress', 'coverage', 'html'],
 
     coverageReporter: {
       type : 'html',
       dir : 'reports/coverage/'
     },
 
+    // the default configuration
+    htmlReporter: {
+      outputDir: 'reports/tests'
+    },
 
     // web server port
     port: 9876,

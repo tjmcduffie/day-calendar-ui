@@ -38,7 +38,7 @@ module.exports = function(grunt) {
         src: ['Gruntfile.js']
       },
       client: {
-        src: ['public/js/{,**/}*.js', '!public/js/vendor/{,**/}*.js']
+        src: ['public/js/{,**/}*.js', '!public/js/vendor/{,**/}*.js', '!public/js/polyfill/{,**/}*.js']
       },
       spec: {
         options: {
@@ -77,8 +77,8 @@ module.exports = function(grunt) {
         options: {
           port: 3001,
           hostname: 'localhost',
-          base: ['public'],
-          directory: 'public',
+          base: ['public', 'spec', 'reports'],
+          directory: 'reports',
           debug: true,
           livereload: 3002,
           open: true
@@ -90,9 +90,12 @@ module.exports = function(grunt) {
       options: {
         configFile: 'karma.conf.js'
       },
-      unit: {
+      continuous: {
         browsers: ['PhantomJS'],
         reporters: ['progress']
+      },
+      unit: {
+        browsers: ['PhantomJS', 'Chrome', 'Firefox', 'Safari']
       // },
       // integration: {
       // },
@@ -146,6 +149,20 @@ module.exports = function(grunt) {
       }
     },
 
+    yuidoc: {
+      compile: {
+        name: '<%= pkg.name %>',
+        description: '<%= pkg.description %>',
+        version: '<%= pkg.version %>',
+        options: {
+          paths: 'public/js',
+          themedir: 'node_modules/yuidoc-bootstrap-theme',
+          helpers: ['node_modules/yuidoc-bootstrap-theme/helpers/helpers.js'],
+          outdir: 'reports/docs'
+        }
+      }
+    },
+
     watch: {
       gruntfile: {
         files: '<%= jshint.gruntfile.src %>',
@@ -156,14 +173,14 @@ module.exports = function(grunt) {
       },
       clientjs: {
         files: '<%= jshint.client.src %>',
-        tasks: ['jshint:client', 'karma'],
+        tasks: ['jshint:client', 'karma:continuous'],
         options: {
           livereload: true
         }
       },
       spec: {
         files: '<%= jshint.spec.src %>',
-        tasks: ['jshint:spec', 'karma']
+        tasks: ['jshint:spec', 'karma:continuous']
       },
       livereload: {
         options: {
@@ -210,8 +227,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-usemin');
 
   // Default task.
-  grunt.registerTask('default', ['bower', 'compass:dev', 'imageprep', 'jshint', 'karma:unit', 'connect:site',
-      'watch']);
+  grunt.registerTask('default', ['bower', 'compass:dev', 'imageprep', 'jshint', 'karma:continuous',
+      'connect:site', 'watch']);
   grunt.registerTask('imageprep', ['newer:responsive_images:backgrounds', 'newer:imagemin:backgrounds']);
 
 };
